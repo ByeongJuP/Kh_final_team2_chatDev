@@ -11,7 +11,7 @@
 <h1>게시글 목록</h1>
 <hr>
 
-<table>
+<table border="1">
 	<tr>
 		<th>글번호</th>
 		<th>제목</th>
