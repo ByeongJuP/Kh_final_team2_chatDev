@@ -59,7 +59,7 @@ $(document).ready(function() {
 
 <div class="header">
 
-	<h1><a href="/">LACUNA SPRING BOARD</a></h1>
+	<h1><a href="/">Jure's Page</a></h1>
 	<c:if test='<%=!"member".equals(request.getRequestURI().split("/")[3]) %>'>
 	<div id="loginBox">
 	<c:choose>
