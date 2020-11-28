@@ -8,15 +8,32 @@
   		<id property="boardNo" column="board_no"/>
   		<result property="writerId" column="writer_id"/>
   		<result property="writerNick" column="writer_nick"/>
-  		<result property="writerDate" column="writer_date"/>
+  		<result property="writeDate" column="write_date"/>
   	</resultMap>
   	
   	<sql id ="selectBoard">
   		select * from board
   	</sql>
   	
-  	<select id="selectBoardList" resultMap="Board">
-  		<include refid="selectBoard"/>
-  		order by board_no desc
+  	<select id="selectBoardList" parameterType="web.common.Paging" resultMap="Board">
+  		select * from (
+  			select rownum rnum, B.* from(
+		  		<include refid="selectBoard"/>
+		  		order by board_no desc
+  			)B
+  			order by rnum
+  		)R
+  		where rnum BETWEEN #{startNo} and #{endNo }
+  	</select>
+  	
+  	<select id="selectCntAll" resultType="int">
+  		select count(*) from(
+  			<include refid="selectBoard" />
+  		) cnt
+  	</select>
+  	
+  	<select id="selectBoardByBoardNo" parameterType="int" resultMap="Board">
+  		select * from board
+  		where board_no = #{boardNo}
   	</select>
   </mapper>
