@@ -1,5 +1,7 @@
 package web.dto;
 
+import java.util.Date;
+
 public class Board {
 
 	private int boardNo;
@@ -8,7 +10,7 @@ public class Board {
 	private String writerId;
 	private String writerNick;
 	private int hit;
-	private String writeDate;
+	private Date writeDate;
 	@Override
 	public String toString() {
 		return "Board [boardNo=" + boardNo + ", title=" + title + ", content=" + content + ", writerId=" + writerId
@@ -50,10 +52,10 @@ public class Board {
 	public void setHit(int hit) {
 		this.hit = hit;
 	}
-	public String getWriteDate() {
+	public Date getWriteDate() {
 		return writeDate;
 	}
-	public void setWriteDate(String writeDate) {
+	public void setWriteDate(Date writeDate) {
 		this.writeDate = writeDate;
 	}
 }
