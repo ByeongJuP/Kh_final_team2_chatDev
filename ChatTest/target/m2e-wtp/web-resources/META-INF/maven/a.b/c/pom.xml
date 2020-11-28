@@ -24,6 +24,14 @@
 	</repositories>
 	
 	<dependencies>
+	
+		<!-- 마이바티스 로그 라이브러리 -->
+		<dependency>
+		    <groupId>org.lazyluke</groupId>
+		    <artifactId>log4jdbc-remix</artifactId>
+		    <version>0.2.7</version>
+		</dependency>
+	
 		<!-- OJDBC6 라이브러리 -->
 		<dependency>
 			<groupId>com.oracle</groupId>
