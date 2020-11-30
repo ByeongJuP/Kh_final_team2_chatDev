@@ -1,11 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
-<c:import url="/WEB-INF/views/layout/header.jsp"/>
-
+<c:import url="/WEB-INF/views/layout/header.jsp" />
+<script type="text/javascript">
+$(document).ready(function(){
+	$("#btnWrite").click(function(){
+		$(location).attr("href", "/board/write");
+	})
+})
 </script>
 <style type="text/css">
 table {
@@ -29,24 +34,43 @@ td:nth-child(2) {
 }
 </style>
 
-<table class="table table-striped table-hover table-condensed">
-	<tr>
-		<th>글번호</th>
-		<th>제목</th>
-		<th>작성자</th>
-		<th>작성일시</th>
-	</tr>
-	<c:forEach items="${list }" var="list">
-	<tr>
-		<td>${list.boardNo }</td>
-		<td><a href="/board/view?boardNo=${list.boardNo}">${list.title }</a></td>
-		<td>${list.writerNick }</td>
-		<td><fmt:formatDate value="${list.writeDate }" pattern= "yy-MM-dd HH:mm:ss" /></td>
-	</tr>
-	</c:forEach>
+<div class="container">
 
+<h1 class="pull-left">게시판 리스트</h1>
+<div class="clearfix"></div>
+<hr>
+
+<table class="table table-striped table-hover table-condensed">
+<thead>
+	<tr>
+		<th style="width: 10%">글번호</th>
+		<th style="width: 45%">제목</th>
+		<th style="width: 20%">작성자</th>
+		<th style="width: 10%">조회수</th>
+		<th style="width: 15%">작성일</th>
+	</tr>
+</thead>
+<tbody>
+<c:forEach items="${list }" var="b">
+	<tr>
+		<td>${b.boardNo }</td>
+		<td><a href="/board/view?boardNo=${b.boardNo }">${b.title }</a></td>
+		<td>${b.writerNick }</td>
+		<td>${b.hit }</td>
+		<td><fmt:formatDate value="${b.writeDate }" pattern="yy-MM-dd HH:mm:ss" /></td>
+	</tr>
+</c:forEach>
+</tbody>
 </table>
 
-<c:import url="/WEB-INF/views/common/paging.jsp" />
+<span class="pull-left">total : ${paging.totalCount }</span>
 
-<c:import url="/WEB-INF/views/layout/footer.jsp"/>
+<button id="btnWrite" class="btn btn-primary pull-right">글쓰기</button>
+
+<div class="clearfix"></div>
+
+<jsp:include page="/WEB-INF/views/common/paging.jsp" />
+
+</div><!-- .container -->
+
+<c:import url="/WEB-INF/views/layout/footer.jsp" />

@@ -1,7 +1,8 @@
 package web.controller;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -44,5 +45,25 @@ public class BoardController {
 		model.addAttribute("board", board);
 		
 		return "board/view";
+	}
+	
+	@RequestMapping(value="/write", method=RequestMethod.GET)
+	public String write() {
+		
+		
+		return "board/write";
+	}
+	
+	@RequestMapping(value="write", method=RequestMethod.POST)
+	public String writeProc(Board write, HttpSession session) {
+		
+		logger.info(write.toString());
+		//logger.info((String) session.getAttribute("id"));
+		write.setWriterId( (String)session.getAttribute("id") );
+		
+		//logger.info(write.toString());
+		boardService.boardWrite(write);
+		
+		return "redirect:/board/list";
 	}
 }

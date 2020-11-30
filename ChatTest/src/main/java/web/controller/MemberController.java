@@ -35,7 +35,8 @@ public class MemberController {
 		
 		if( member != null) {
 			session.setAttribute("login", true);
-			session.setAttribute("member", member);
+			session.setAttribute("id", member.getId());
+			session.setAttribute("nick", member.getNick());
 			
 			return "redirect:/board/list";
 		}
