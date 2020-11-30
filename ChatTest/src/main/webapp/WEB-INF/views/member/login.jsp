@@ -15,7 +15,7 @@
 		<td><input type="password" name="pw"/> </td>
 	</tr>
 	<tr>
-		<td><input type="button" value="회원가입"></td>
+		<td><input type="button" value="회원가입" onclick="location.href='/member/join'"></td>
 		<td><button>로그인</button></td>
 	</tr>
 </table>
