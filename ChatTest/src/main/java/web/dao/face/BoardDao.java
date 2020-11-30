@@ -13,4 +13,6 @@ public interface BoardDao {
 
 	public Board selectBoardByBoardNo(int boardNo);
 
+	public void addBoard(Board write);
+
 }

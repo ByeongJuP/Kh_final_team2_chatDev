@@ -13,4 +13,6 @@ public interface BoardService {
 
 	public Board getBoardByBoardNo(int boardNo);
 
+	public void boardWrite(Board write);
+
 }

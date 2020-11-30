@@ -36,4 +36,10 @@
   		select * from board
   		where board_no = #{boardNo}
   	</select>
+  	
+  	<insert id="addBoard" parameterType="web.dto.Board">
+  		insert into board(board_no, title, content, writer_id, writer_nick)
+  		values ( board_seq.nextval, #{title}, #{content}, #{writerId}
+  			, (select nick from member where id=#{writerId} ) )
+  	</insert>
   </mapper>

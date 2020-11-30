@@ -40,4 +40,9 @@ public class BoardServiceImpl implements BoardService {
 	public Board getBoardByBoardNo(int boardNo) {
 		return boardDao.selectBoardByBoardNo(boardNo);
 	}
+	
+	@Override
+	public void boardWrite(Board write) {
+		boardDao.addBoard(write);
+	}
 }
