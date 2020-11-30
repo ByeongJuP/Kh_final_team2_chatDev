@@ -51,5 +51,28 @@ public class MemberController {
 		
 		return "redirect:/member/login";
 	}
+	
+	@RequestMapping(value="/join", method=RequestMethod.GET)
+	public String join() {
+		return "member/join";
+	}
+	
+	@RequestMapping(value="/join", method=RequestMethod.POST)
+	public String joinProc(Member mem) {
+		logger.info(mem.toString());
+		
+		boolean joinResult = memberService.joinUser(mem);
+		
+		if(joinResult) {
+			return "redirect:/member/login";
+		} else {
+			return "redirect:/member/join";
+		}
+	}
+	
+	@RequestMapping(value="/main")
+	public void main() {
+		
+	} 
 
 }

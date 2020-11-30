@@ -9,4 +9,14 @@
  		where id = #{id}
  		and pw = #{pw}
  	</select>
+ 	
+ 	<select id="selectByUserid" parameterType="web.dto.Member" resultType="int">
+ 		select count(*) from member
+ 		where id = #{id}
+ 	</select>
+ 	
+ 	<insert id="join" parameterType="web.dto.Member">
+ 		insert into member
+ 		values (#{id}, #{pw}, #{nick})
+ 	</insert>
  </mapper>
