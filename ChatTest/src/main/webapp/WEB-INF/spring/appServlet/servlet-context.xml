@@ -12,6 +12,16 @@
 	<!-- Enables the Spring MVC @Controller programming model -->
 	<annotation-driven />
 
+	<!-- 인터셉터 설정 -->
+	<interceptors>
+		<interceptor>
+			<mapping path="/board/**"/>
+			<exclude-mapping path="/board/list"/>
+			<beans:bean class="web.interceptor.LoginInterceptorController" />
+		</interceptor>
+	</interceptors>
+
+
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
 	<resources mapping="/resources/**" location="/resources/" />
 
