@@ -21,4 +21,18 @@ public class MemberServiceImpl implements MemberService{
 		return memberDao.searchByMem(mem);
 	}
 	
+	@Override
+	public boolean joinUser(Member mem) {
+		//회원가입된 아이디 있는지 조회
+		if(memberDao.selectByUserid(mem)>0)
+			return false;
+		//가입 안되었으면 회원가입 진행
+		memberDao.join(mem);
+		
+		//회원가입이 잘 되었는지 조회
+		if(memberDao.selectByUserid(mem)>0)
+			return true;
+		else return false;
+	}
+	
 }
