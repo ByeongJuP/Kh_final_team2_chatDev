@@ -42,4 +42,25 @@
   		values ( board_seq.nextval, #{title}, #{content}, #{writerId}
   			, (select nick from member where id=#{writerId} ) )
   	</insert>
+  	
+  	<select id="searchBoardByBoardNo" parameterType="int" resultType="int">
+  		select count(*) from board
+  		where board_no = #{boardNo}
+  	</select>
+  	
+  	<delete id="deleteBoard" parameterType="int">
+  		delete board
+  		where board_no = #{boardNo}
+  	</delete>
+  	
+  	<select id="getBoardByBoardNo" parameterType="int" resultMap="Board">
+  		select * from board
+  		where board_no = #{boardNo}
+  	</select>
+  	
+  	<update id="updateHit" parameterType="int">
+  		update board
+  		set hit = hit+1
+  		where board_no = #{boardNo}
+  	</update>
   </mapper>

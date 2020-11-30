@@ -15,4 +15,8 @@ public interface BoardService {
 
 	public void boardWrite(Board write);
 
+	public int deleBoard(int boardNo);
+
+	public Board getBoard(int boardNo);
+
 }
