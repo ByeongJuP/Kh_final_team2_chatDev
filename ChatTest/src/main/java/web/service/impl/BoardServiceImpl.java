@@ -38,11 +38,31 @@ public class BoardServiceImpl implements BoardService {
 	
 	@Override
 	public Board getBoardByBoardNo(int boardNo) {
+		
+		boardDao.updateHit(boardNo);
+		
 		return boardDao.selectBoardByBoardNo(boardNo);
 	}
 	
 	@Override
 	public void boardWrite(Board write) {
 		boardDao.addBoard(write);
+	}
+	
+	@Override
+	public int deleBoard(int boardNo) {
+		int res = boardDao.searchBoardByBoardNo(boardNo);
+		
+		if(res == 1) {
+			boardDao.deleteBoard(boardNo);
+			return 0;
+		} 
+		return 1;
+	}
+	
+	@Override
+	public Board getBoard(int boardNo) {
+		Board board;
+		return board = boardDao.getBoardByBoardNo(boardNo);
 	}
 }

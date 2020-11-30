@@ -42,7 +42,7 @@ public class BoardController {
 	public String view(int boardNo, Model model) {
 		
 		Board board = boardService.getBoardByBoardNo(boardNo);
-		model.addAttribute("board", board);
+		model.addAttribute("view", board);
 		
 		return "board/view";
 	}
@@ -65,5 +65,28 @@ public class BoardController {
 		boardService.boardWrite(write);
 		
 		return "redirect:/board/list";
+	}
+	
+	@RequestMapping(value="/delete", method = RequestMethod.GET)
+	public String boardDelete(int boardNo) {
+		
+		int res = boardService.deleBoard(boardNo);
+		
+		if (res == 0) {
+			return "redirect:/board/list";
+		} else {
+			return "redirect:/board/view?boardNo="+boardNo;
+		}
+	}
+	
+	@RequestMapping(value="/update", method= RequestMethod.GET)
+	public String boardUpdate(int boardNo, Model model) {
+		
+		Board board = boardService.getBoard(boardNo);
+		logger.info(board.toString());
+		
+		model.addAttribute("board", board);
+		
+		return "board/update";
 	}
 }

@@ -15,4 +15,12 @@ public interface BoardDao {
 
 	public void addBoard(Board write);
 
+	public int searchBoardByBoardNo(int boardNo);
+
+	public void deleteBoard(int boardNo);
+
+	public Board getBoardByBoardNo(int boardNo);
+
+	public void updateHit(int boardNo);
+
 }
