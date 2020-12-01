@@ -1,23 +1,59 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<c:import url="/WEB-INF/views/layout/header.jsp"/>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
 
-<form action="/member/login" method="post">
-<table>
-	<tr>
-		<td>아이디</td>
-		<td><input type="text" name="id" /></td>
-	</tr>
-	<tr>
-		<td>비밀번호</td>
-		<td><input type="password" name="pw"/> </td>
-	</tr>
-	<tr>
-		<td><input type="button" value="회원가입" onclick="location.href='/member/join'"></td>
-		<td><button>로그인</button></td>
-	</tr>
-</table>
+<c:import url="/WEB-INF/views/layout/header.jsp" />
+
+<script type="text/javascript">
+$(document).ready(function() {
+	$("#cancel").click(function() {
+			history.back(-1);
+		});
+		
+	$("#id").focus();
+});
+</script>
+
+<style type="text/css">
+.form-control:focus {
+ 	border: 1px solid green !important;
+/* 	box-shadow: 0 0 3px green !important; */
+/* 	-moz-box-shadow: 0 0 3px green !important; */
+  	-webkit-box-shadow: 0 0 3px green !important;
+	
+}
+</style>
+
+<div class="container">
+
+<h1>로그인</h1>
+<hr>
+<div>
+<form action="/member/login" method="post" class="form-horizontal">
+	<div class="form-group">
+		<label class="col-xs-3 control-label" for="id">아이디 : </label>
+		<div class="col-xs-6">
+			<input type="text" class="form-control" id="id" name="id" placeholder="Id"/>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label class="col-xs-3 control-label" for="pw">패스워드 : </label>
+		<div class="col-xs-6">
+			<input type="password" class="form-control" id="pw" name="pw" placeholder="Password"/>
+		</div>
+	</div>
+		
+	<div class="form-group">
+		<div class="col-xs-offset-3 col-xs-10">
+			<button class="btn btn-primary">로그인</button>
+			<input type="reset" id="cancel" class="btn btn-danger" value="취소"/>
+		</div>
+	</div>
 </form>
-<c:import url="/WEB-INF/views/layout/footer.jsp"/>
+</div>
+
+</div><!-- .container -->
+
+<c:import url="/WEB-INF/views/layout/footer.jsp" />

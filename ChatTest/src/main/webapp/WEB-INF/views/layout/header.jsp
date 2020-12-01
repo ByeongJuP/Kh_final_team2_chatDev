@@ -49,6 +49,10 @@ $(document).ready(function() {
 	$("#btnLogout").click(function() {
 		$(location).attr("href", "/member/logout");
 	});
+	
+	$("#chatList").click(function(){
+		$(location).attr("href", "/chat/list");
+	});
 })
 </script>
 
@@ -64,11 +68,13 @@ $(document).ready(function() {
 	<div id="loginBox">
 	<c:choose>
 		<c:when test="${empty login }">
+			<button id="chatList" class="btn">채팅</button>
 			<button id="btnLogin" class="btn">로그인</button>
 		</c:when>
 		<c:otherwise>
 			<div class="pull-right">
 				<c:out value="${nick }" />님 환영합니다
+				<button id="chatList" class="btn">채팅</button>
 				<button id="btnLogout" class="btn btn-warning">로그아웃</button>
 			</div>
 		</c:otherwise>
