@@ -9,6 +9,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.socket.WebSocketSession;
 
 import web.websocket.domain.ChatRoom;
 import web.websocket.repo.ChatRoomRepository;
@@ -33,6 +35,20 @@ public class ChatController {
 		System.out.println(list);
 		
 		model.addAttribute("rooms", list);
-		logger.info("view페이지로 이동");
+		//logger.info("view페이지로 이동");
+	}
+	
+	@RequestMapping(value="/create", method=RequestMethod.GET)
+	public String createChatRoom() {
+		
+		return "chat/creatChatRoom";
+	}
+	
+	@RequestMapping(value="/create", method=RequestMethod.POST)
+	public String createChatRoomProc(String title) {
+		logger.info(title);
+		chatRoomRepository.createChatRoom(title);
+		
+		return "redirect:/chat/list";
 	}
 }

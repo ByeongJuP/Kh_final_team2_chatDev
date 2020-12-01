@@ -26,7 +26,7 @@
         </c:if>
         </tbody>
     </table>
-    <a class = "btn btn-primary pull-right" href = "/new">새로 만들기</a>
+    <a class = "btn btn-primary pull-right" href = "/chat/create">새로 만들기</a>
 </div>
 
 <c:import url="/WEB-INF/views/layout/footer.jsp"/>
