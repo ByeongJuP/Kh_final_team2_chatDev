@@ -1,20 +1,12 @@
 package web.websocket.domain;
 
 import java.io.IOException;
-import java.net.InetSocketAddress;
-import java.net.URI;
-import java.security.Principal;
-import java.util.HashSet;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 
-import org.springframework.http.HttpHeaders;
-import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
-import org.springframework.web.socket.WebSocketExtension;
-import org.springframework.web.socket.WebSocketMessage;
 import org.springframework.web.socket.WebSocketSession;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -23,7 +15,7 @@ public class ChatRoom {
 
 	private String roomId;
 	private String name;
-	private Set<WebSocketSession> sessions = new HashSet<>();
+	private List<WebSocketSession> sessions = new ArrayList<WebSocketSession>();
 	
 	public static ChatRoom create(String title) {
 		System.out.println(" + + + create 메소드 + + + ");
@@ -75,10 +67,10 @@ public class ChatRoom {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public Set<WebSocketSession> getSessions() {
+	public List<WebSocketSession> getSessions() {
 		return sessions;
 	}
-	public void setSessions(Set<WebSocketSession> sessions) {
+	public void setSessions(List<WebSocketSession> sessions) {
 		this.sessions = sessions;
 	}
 	
