@@ -1,8 +1,9 @@
 package web.websocket.domain;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 import org.springframework.web.socket.TextMessage;
@@ -14,17 +15,16 @@ public class ChatRoom {
 
 	private String roomId;
 	private String name;
-	private List<WebSocketSession> sessions = new ArrayList<WebSocketSession>();
+	private Set<WebSocketSession> sessions = new HashSet<>();
 	
-	public static ChatRoom create(String title, WebSocketSession session) {
+	public static ChatRoom create(String name) {
 		System.out.println(" + + + create 메소드 + + + ");
 		ChatRoom chatRoom = new ChatRoom();
 		chatRoom.roomId = UUID.randomUUID().toString();
-		chatRoom.name = title;
-		chatRoom.sessions.add(session);
+		chatRoom.name = name;
 		
 		System.out.println("chatRoom : "+chatRoom);
-		System.out.println(" + + + create 메소드 완료");
+		System.out.println(" + + + create 메소드 완료 + + +");
 		return chatRoom;
 	}
 	
@@ -67,12 +67,17 @@ public class ChatRoom {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public List<WebSocketSession> getSessions() {
+
+	public Set<WebSocketSession> getSessions() {
 		return sessions;
 	}
-	public void setSessions(List<WebSocketSession> sessions) {
+
+	public void setSessions(Set<WebSocketSession> sessions) {
 		this.sessions = sessions;
 	}
+	
+	
+
 	
 	
 }

@@ -28,47 +28,43 @@ public class ChatController {
 	public void chatList(HttpSession session, Model model) {
 		logger.info("채팅리스트 ");
 		//session.getAttribute("id");
-		List<ChatRoom> list;
-		try {
-			list = chatRoomRepository.findAllRoom();
-		} catch (Exception e) {
-			list = null;
-		}
-		System.out.println(list);
+//		List<ChatRoom> list;
+//		try {
+//			list = chatRoomRepository.findAllRoom();
+//		} catch (Exception e) {
+//			list = null;
+//		}
+//		System.out.println(list);
+		System.out.println("조회된 채팅방 : "+chatRoomRepository.findAllRoom() );
 		
-		model.addAttribute("rooms", list);
+		model.addAttribute("rooms", chatRoomRepository.findAllRoom());
 		//logger.info("view페이지로 이동");
 	}
 	
 	@RequestMapping(value="/create", method=RequestMethod.GET)
 	public String createChatRoom(Model model) {
 		ChatRoomForm form = new ChatRoomForm();
+		logger.info("{}",form);
 		model.addAttribute("form", form);
 		return "chat/creatChatRoom";
 	}
 	
 	@RequestMapping(value="/create", method=RequestMethod.POST)
-	public String createChatRoomProc(String title, WebSocketSession session) {
-		logger.info(title+"의 채팅방 개설하기");
-		WebSocketHandler wsh = new WebSocketHandler();
-		System.out.println("wsh : "+wsh);
-		try {
-			wsh.afterConnectionEstablished(session);
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
-		chatRoomRepository.createChatRoom(title, session);
+	public String createChatRoomProc(ChatRoomForm form) {
+		logger.info(""+form);
+		chatRoomRepository.createChatRoom(form.getName());
 		
 		return "redirect:/chat/list";
 	}
 	
 	
-	@RequestMapping(value="/chat/{id}", method=RequestMethod.GET)
-	public String room(String id, Model model) {
-		
-		ChatRoom room = chatRoomRepository.findRoomById(id);
+	@RequestMapping(value="/room", method=RequestMethod.GET)
+	public String room(String roomId, Model model) {
+		logger.info("채팅방 입장 ");
+		logger.info("id : "+roomId);
+		ChatRoom room = chatRoomRepository.findRoomById(roomId);
 		logger.info("room : "+room);
 		model.addAttribute("room", room);
-		return "room";
+		return "chat/room";
 	}
 }

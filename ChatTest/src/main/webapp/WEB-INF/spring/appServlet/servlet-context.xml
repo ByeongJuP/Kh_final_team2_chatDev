@@ -40,7 +40,7 @@
 	<!-- Websocket Handler 등록 -->
 	<beans:bean id="chatHandler" class="web.websocket.handler.WebSocketHandler"/>
 	<websocket:handlers>
-		<websocket:mapping handler="chatHandler" path="/chat/{id}" />
+		<websocket:mapping handler="chatHandler" path="/chatws" />
 		<websocket:handshake-interceptors>
 			<beans:bean class="org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor" />
 		</websocket:handshake-interceptors>

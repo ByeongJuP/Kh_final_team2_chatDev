@@ -35,4 +35,6 @@ public class ChatMessage {
 	public void setType(MessageType type) {
 		this.type = type;
 	}
+	
+	
 }

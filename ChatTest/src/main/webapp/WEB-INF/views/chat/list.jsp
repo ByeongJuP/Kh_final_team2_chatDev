@@ -15,14 +15,16 @@
         </tr>
         </thead>
         <tbody>
-        <c:if test="${room ne null }">
-        <tr th:each="room : ${rooms }">
-            <td th:text="${room.roomId}"></td>
-            <td th:text="${room.name}"></td>
+        <c:if test="${rooms ne null }">
+        <c:forEach items="${rooms }" var="rooms">
+        <tr>
+            <td>${rooms.roomId}</td>
+            <td >${rooms.name}</td>
             <td>
-                <a class = "btn btn-primary" th:href = "@{/chat/{id} (id = ${room.roomId})}"></a>
+                <a class = "btn btn-primary" href = "/chat/room?roomId=${rooms.roomId}">채팅참여</a>
             </td>
         </tr>
+        </c:forEach>
         </c:if>
         </tbody>
     </table>
