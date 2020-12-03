@@ -3,7 +3,6 @@ package web.websocket.domain;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 import java.util.UUID;
 
 import org.springframework.web.socket.TextMessage;
@@ -17,11 +16,12 @@ public class ChatRoom {
 	private String name;
 	private List<WebSocketSession> sessions = new ArrayList<WebSocketSession>();
 	
-	public static ChatRoom create(String title) {
+	public static ChatRoom create(String title, WebSocketSession session) {
 		System.out.println(" + + + create 메소드 + + + ");
 		ChatRoom chatRoom = new ChatRoom();
 		chatRoom.roomId = UUID.randomUUID().toString();
 		chatRoom.name = title;
+		chatRoom.sessions.add(session);
 		
 		System.out.println("chatRoom : "+chatRoom);
 		System.out.println(" + + + create 메소드 완료");

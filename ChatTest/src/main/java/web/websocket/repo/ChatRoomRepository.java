@@ -33,9 +33,9 @@ public class ChatRoomRepository {
 		return chatRoomMap.get(id);
 	}
 	
-	public ChatRoom createChatRoom(String title) {
+	public ChatRoom createChatRoom(String title, WebSocketSession session) {
 		System.out.println(" + + + createChatRoom메소드 + + + ");
-		ChatRoom chatRoom = ChatRoom.create(title);
+		ChatRoom chatRoom = ChatRoom.create(title, session);
 		
 		System.out.println("chatRoom : "+chatRoom);
 		System.out.println("roomId : "+chatRoom.getRoomId());

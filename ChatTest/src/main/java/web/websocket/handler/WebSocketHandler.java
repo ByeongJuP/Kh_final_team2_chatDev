@@ -3,6 +3,7 @@ package web.websocket.handler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
@@ -18,12 +19,11 @@ public class WebSocketHandler extends TextWebSocketHandler{
 
 	private static final Logger logger = LoggerFactory.getLogger(WebSocketHandler.class);
 	@Autowired private ChatRoomRepository chatRoomRepository;
-	@Autowired private ObjectMapper objectMapper;
+	private ObjectMapper objectMapper;
 	
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
-		// TODO Auto-generated method stub
-		super.afterConnectionEstablished(session);
+		logger.info("WebSocketHandler 접속");
 	}
 	
 	@Override
@@ -34,6 +34,12 @@ public class WebSocketHandler extends TextWebSocketHandler{
 		ChatMessage chatMessage = objectMapper.readValue(msg, ChatMessage.class);
 		ChatRoom chatRoom = chatRoomRepository.findRoomById(chatMessage.getChatRoomId());
 		chatRoom.handleMessage(session, chatMessage, objectMapper);
+	}
+	
+	@Override
+	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
+		// TODO Auto-generated method stub
+		super.afterConnectionClosed(session, status);
 	}
 
 }
