@@ -20,7 +20,7 @@
             <td th:text="${room.roomId}"></td>
             <td th:text="${room.name}"></td>
             <td>
-                <a class = "btn btn-primary" th:href = "@{/rooms/{id} (id = ${room.roomId})}"></a>
+                <a class = "btn btn-primary" th:href = "@{/chat/{id} (id = ${room.roomId})}"></a>
             </td>
         </tr>
         </c:if>

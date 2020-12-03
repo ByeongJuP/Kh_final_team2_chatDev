@@ -21,6 +21,12 @@ public class WebSocketHandler extends TextWebSocketHandler{
 	@Autowired private ObjectMapper objectMapper;
 	
 	@Override
+	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
+		// TODO Auto-generated method stub
+		super.afterConnectionEstablished(session);
+	}
+	
+	@Override
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
 		
 		logger.info("메세지 전송 = {} : {}", session, message.getPayload());

@@ -51,4 +51,12 @@ public class ChatController {
 		
 		return "redirect:/chat/list";
 	}
+	
+	@RequestMapping(value="/chat/{id}", method=RequestMethod.GET)
+	public String room(String id, Model model) {
+		ChatRoom room = chatRoomRepository.findRoomById(id);
+		logger.info("room : "+room);
+		model.addAttribute("room", room);
+		return "room";
+	}
 }
