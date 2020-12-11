@@ -28,7 +28,7 @@ var webSocket
 if (webSocket !== undefined && webSocket.readyState != WebSocket.CLOSED){
 	
 } else {
-	webSocket = new WebSocket("ws://localhost:8088/chatws");
+	webSocket = new WebSocket("ws://localhost:8088/chatws/${room.roomId}");
 }
 webSocket.onopen = onOpen();
 webSocket.onmessage = onMessage;
