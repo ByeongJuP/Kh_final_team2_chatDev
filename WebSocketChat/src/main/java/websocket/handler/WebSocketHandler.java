@@ -1,8 +1,7 @@
-package web.websocket.handler;
+package websocket.handler;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,13 +12,11 @@ import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import web.websocket.repo.ChatRoomRepository;
-
 
 public class WebSocketHandler extends TextWebSocketHandler{
 
 	private static final Logger logger = LoggerFactory.getLogger(WebSocketHandler.class);
-	private ChatRoomRepository chatRoomRepository;
+	//private ChatRoomRepository chatRoomRepository;
 	private ObjectMapper objectMapper = new ObjectMapper();
 	
 	//세션을 저장할 리스트 생성
@@ -49,11 +46,11 @@ public class WebSocketHandler extends TextWebSocketHandler{
 		//전송된 메세지 조회
 		TextMessage msg = new TextMessage(message.getPayload());
 		logger.info("msg : "+msg);
-		logger.info("msg : "+msg.getPayload());
-//		for(Map<String, String> sess : sessionList) {
-//			sess.sendMessage(msg);
+		
 		//웹소켓 Uri와 내가 접속한 Uri가 같을때 msg를 뿌려준다.
 		for(WebSocketSession sess : sessionList) {
+//		for(Map<String, String> sess : sessionList) {
+//			sess.sendMessage(msg);
 			if(session.getUri().toString().equals(sess.getUri().toString())) {
 				logger.info("접속중인 websocket의 uri가 같습니다");
 				logger.info("sess    : "+sess.getUri());

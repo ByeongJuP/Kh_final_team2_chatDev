@@ -9,7 +9,6 @@
     <table class = "table table-striped">
         <thead>
         <tr>
-            <th>번호</th>
             <th>방 이름</th>
             <th>입장버튼</th>
         </tr>
@@ -18,7 +17,6 @@
         <c:if test="${rooms ne null }">
         <c:forEach items="${rooms }" var="rooms">
         <tr>
-            <td>${rooms.roomId}</td>
             <td >${rooms.name}</td>
             <td>
                 <a class = "btn btn-primary" href = "/chat/room?roomId=${rooms.roomId}">채팅참여</a>
