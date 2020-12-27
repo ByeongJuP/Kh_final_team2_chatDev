@@ -21,16 +21,18 @@
 <button class="btn btn-primary" onclick="send();">전송 </button>
 
 <script type="text/javascript">
-var webSocket;
-
 //웹소켓 객체 생성 코드
-var webSocket
+var webSocket;
+console.log(webSocket)
 if (webSocket !== undefined && webSocket.readyState != WebSocket.CLOSED){
-	
+	console.log("이미 만들어져있습니다.")
 } else {
+	console.log("새로운 websocket생성.")
 	webSocket = new WebSocket("ws://localhost:8088/chatws/${room.roomId}");
+	console.log(webSocket);
+	//webSocket.onOpen();
 }
-webSocket.onopen = onOpen();
+webSocket.onopen;
 webSocket.onmessage = onMessage;
 
 var id = "${id}";
@@ -43,7 +45,8 @@ $(document).ready(function(){
 })
 function send(){
 	var msg = document.getElementById("message").value;
-	var sendMsg = "{chatRoomId:${room.roomId}, type:CHAT, writer:${id}, message:"+msg+" }"
+// 	var sendMsg = "{chatRoomId:${room.roomId}, type:CHAT, writer:${id}, message:"+msg+" }"
+	var sendMsg = "{writer:${id}, message:"+msg+" }"
     console.log("msg : "+msg);
     console.log("msg : "+sendMsg);
     webSocket.send(sendMsg);
@@ -51,18 +54,25 @@ function send(){
 }
 
 function disconnect(){
-	var sendMsg = "{chatRoomId:${room.roomId}, type=LEAVE, writer:${id}}"
+// 	var sendMsg = "{chatRoomId:${room.roomId}, type=LEAVE, writer:${id}}"
+	var sendMsg = "{writer:${id}}"
     webSocket.send(sendMsg);
     webSocket.close();
 }
 
 function onOpen(){
 	var sendMsg = "{chatRoomId:${room.roomId}, type=ENTER, writer:${id}}"
+// 	var sendMsg = "{writer:${id}}"
     webSocket.send(sendMsg);
 }
 
 function onMessage(e){
     data = e.data;
+    console.log(e);
+    console.log(data);
+    console.log(data.message);
+    console.log("웹소켓에서 전달해준 메세지 : "+data);
+    
     chatroom = document.getElementById("chatroom");
     chatroom.innerHTML = chatroom.innerHTML + "<br>" + data;
 }
